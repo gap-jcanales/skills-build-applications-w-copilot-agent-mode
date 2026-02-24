@@ -25,7 +25,14 @@ SECRET_KEY = 'django-insecure-lwvdolp84l6vcn282$^%ci!)^&!(+ewf^2jqzz)6nr-c!lx&m$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+import os
+CODESPACE_NAME = os.environ.get("CODESPACE_NAME")
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    f"{CODESPACE_NAME}-8000.app.github.dev" if CODESPACE_NAME else "",
+    "*"
+]
 
 
 # Application definition
@@ -85,10 +92,6 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb://localhost:27017/',
-            'username': '',
-            'password': '',
-            'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-1',
         },
     }
 }
